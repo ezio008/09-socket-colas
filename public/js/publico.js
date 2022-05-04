@@ -1,0 +1,40 @@
+// referencias
+const lblTicket1 = document.querySelector('#lblTicket1');
+const lblEscritorio1 = document.querySelector('#lblEscritorio1');
+const lblTicket2 = document.querySelector('#lblTicket2');
+const lblEscritorio2 = document.querySelector('#lblEscritorio2');
+const lblTicket3 = document.querySelector('#lblTicket3');
+const lblEscritorio3 = document.querySelector('#lblEscritorio3');
+const lblTicket4 = document.querySelector('#lblTicket4');
+const lblEscritorio4 = document.querySelector('#lblEscritorio4');
+
+const socket = io();
+let first = true;
+socket.on('estado-actual', (payload) => {
+    
+    if (!first) {
+        const audio = new Audio('./audio/new-ticket.mp3');
+        audio.play();
+    } else {
+        first = false;
+    }
+
+    const [ticket1, ticket2, ticket3, ticket4] = payload;
+
+    lblTicket1.innerText = ticket2
+        ? `Ticket ${ticket1.numero}` : '';
+    lblEscritorio1.innerText = ticket2
+        ? `${ticket1.escritorio}` : '';
+    lblTicket2.innerText = ticket2
+        ? `Ticket ${ticket2.numero}` : '';
+    lblEscritorio2.innerText = ticket2
+        ? `${ticket2.escritorio}` : '';
+    lblTicket3.innerText = ticket3
+        ? `Ticket ${ticket3.numero}` : '';
+    lblEscritorio3.innerText = ticket3
+        ? `${ticket3.escritorio}` : '';
+    lblTicket4.innerText = ticket4
+        ? `Ticket ${ticket4.numero}` : '';
+    lblEscritorio4.innerText = ticket4
+        ? `${ticket4.escritorio}` : '';
+});
